@@ -1,44 +1,61 @@
 #include<iostream>
 #include<stack>
 #include<string>
+#include<fstream>
 using namespace std;
 
 
 
-string prettifying(const string& XML){
+void prettifyXML(const string& inputFile, const string& outputFile) {
+    ifstream input(inputFile);
+    ofstream output(outputFile);
+
+    if (!input.is_open()||!output.is_open()) {
+        cout << "Can't open the input or the output file.\nTry Again!!" << endl;
+        return;
+    }
+
     stack<string> tag;
     string inside;  //take words between tags
+    string XML;
     string formatted_XML;
 
-    
-    for(char c:XML){
-        if (c=='<'){
-            if(!inside.empty()){
-                formatted_XML.append(string(tag.size(),'\t')+inside+"\n");
+    while (getline(input,XML)){
+        for(char c:XML){
+            if (c=='<'){
+                if(!inside.empty()){
+                    formatted_XML.append(string(tag.size(),'\t')+inside+"\n");
+                    inside.clear();
+                }
+                inside = inside + c;
+            }else if(c=='>'){
+                inside = inside + c;
+                if (inside[1]=='/'){ //closed tag
+                    tag.pop();
+                    formatted_XML.append(string(tag.size(),'\t')+inside+"\n");
+                }else if(inside[inside.size()-2]=='/'){ //self closed tag
+                    formatted_XML.append(string(tag.size(),'\t')+inside+"\n");
+                }else{ //open tag
+                    formatted_XML.append(string(tag.size(),'\t')+inside+"\n");
+                    tag.push(inside);
+                }
                 inside.clear();
+            }else{
+                inside = inside + c;
             }
-            inside = inside + c;
-        }else if(c=='>'){
-            inside = inside + c;
-            if (inside[1]=='/'){ //closed tag
-                tag.pop();
-                formatted_XML.append(string(tag.size(),'\t')+inside+"\n");
-            }else{ //open tag
-                formatted_XML.append(string(tag.size(),'\t')+inside+"\n");
-                tag.push(inside);
-            }
-            inside.clear();
-        }else{
-            inside = inside + c;
         }
     }
-    return formatted_XML;
+    
+    output << formatted_XML;
+    
+    input.close();
+    output.close();
+    cout << "XML prettified successfully and saved." << endl;
 }
 
 int main(){
-    string XML = "<users><user><id>5</id><name>Alice</name><posts><post>Post 1</post><post>Post 2</post></posts></user><user><id>10</id><name>Bob</name><posts><post>Post 3</post></posts></user></users>";
-    string formatted_XML = prettifying(XML);
-    cout<<"Da l gamal ya habeby\n"<<formatted_XML;
-
+    string inputFile = "input.xml";
+    string outputFile = "output.xml";
+    prettifyXML(inputFile, outputFile);
     return 0;
 }
