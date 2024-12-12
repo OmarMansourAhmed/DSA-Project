@@ -1,0 +1,99 @@
+{
+"users": {
+	"user": {
+		"id": {
+				"value": "1"
+			}
+		,
+		"name": {
+				"value": "Ahmed Ali"
+			}
+		,
+		"posts": {
+			"post": {
+				"body": {
+						"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+					}
+				,
+				"topics": {
+					"topic": {
+							"value": "economy"
+						}
+					}
+				}
+			}
+		,
+		"followers": {
+			"follower": {
+				"id": {
+						"value": "3"
+					}
+				}
+			}
+		}
+	,
+	"user": {
+		"id": {
+				"value": "2"
+			}
+		,
+		"name": {
+				"value": "Yasser Ahmed"
+			}
+		,
+		"posts": {
+			"post": {
+				"body": {
+						"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+					}
+				,
+				"topics": {
+					"topic": {
+							"value": "education"
+						}
+					}
+				}
+			}
+		,
+		"followers": {
+			"follower": {
+				"id": {
+						"value": "1"
+					}
+				}
+			}
+		}
+	,
+	"user": {
+		"id": {
+				"value": "3"
+			}
+		,
+		"name": {
+				"value": "Mohamed Sherif"
+			}
+		,
+		"posts": {
+			"post": {
+				"body": {
+						"value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+					}
+				,
+				"topics": {
+					"topic": {
+							"value": "sports"
+						}
+					}
+				}
+			}
+		,
+		"followers": {
+			"follower": {
+				"id": {
+						"value": "1"
+					}
+				}
+			}
+		}
+	}
+}
