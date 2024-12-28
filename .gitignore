@@ -1,0 +1,7 @@
+.vscode
+ConvertToJSON.exe
+Install-Package
+test.cpp
+test2.cpp
+test2.exe
+test.xml
