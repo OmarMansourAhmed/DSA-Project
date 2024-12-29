@@ -6,6 +6,14 @@ using namespace std;
 
 
 
+string repeatString(const std::string& str, int times) {
+    std::string result;
+    for (int i = 0; i < times; ++i) {
+        result += str;
+    }
+    return result;
+}
+
 void prettifyXML(const string& inputFile, const string& outputFile) {
     ifstream input(inputFile);
     ofstream output(outputFile);
@@ -24,7 +32,7 @@ void prettifyXML(const string& inputFile, const string& outputFile) {
         for(char c:XML){
             if (c=='<'){
                 if(!inside.empty()){
-                    formatted_XML.append(string(tag.size(),'\t')+inside+"\n");
+                    formatted_XML += repeatString("    ",tag.size())+inside+"\n";
                     inside.clear();
                 }
                 inside = inside + c;
@@ -32,11 +40,11 @@ void prettifyXML(const string& inputFile, const string& outputFile) {
                 inside = inside + c;
                 if (inside[1]=='/'){ //closed tag
                     tag.pop();
-                    formatted_XML.append(string(tag.size(),'\t')+inside+"\n");
+                    formatted_XML += repeatString("    ",tag.size())+inside+"\n";
                 }else if(inside[inside.size()-2]=='/'){ //self closed tag
-                    formatted_XML.append(string(tag.size(),'\t')+inside+"\n");
+                    formatted_XML += repeatString("    ",tag.size())+inside+"\n";
                 }else{ //open tag
-                    formatted_XML.append(string(tag.size(),'\t')+inside+"\n");
+                    formatted_XML += repeatString("    ",tag.size())+inside+"\n";
                     tag.push(inside);
                 }
                 inside.clear();
@@ -44,10 +52,10 @@ void prettifyXML(const string& inputFile, const string& outputFile) {
                 inside = inside + c;
             }
         }
+        output << formatted_XML;
+        formatted_XML.clear();
     }
-    
-    output << formatted_XML;
-    
+        
     input.close();
     output.close();
     cout << "XML prettified successfully and saved." << endl;
