@@ -1,10 +1,4 @@
-#include<iostream>
-#include<stack>
-#include<string>
-#include<fstream>
-using namespace std;
-
-
+#include <prettifying_XML.h>
 
 string repeatString(const std::string& str, int times) {
     std::string result;
