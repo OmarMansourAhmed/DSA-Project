@@ -1,10 +1,4 @@
-#include<iostream>
-#include<stack>
-#include<string>
-#include<fstream>
-using namespace std;
-
-
+#include <prettifying_XML.h>
 
 void prettifyXML(const string& inputFile, const string& outputFile) {
     ifstream input(inputFile);

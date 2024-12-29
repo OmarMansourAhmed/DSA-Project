@@ -1,12 +1,4 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <map>
-#include <vector>
-#include <sstream>
-#include <cctype>
-
-using namespace std;
+#include <ConvertToJSON.h>
 
 // Helper function to trim whitespace from a string
 string trim(const string &str)
@@ -15,15 +7,6 @@ string trim(const string &str)
   int end = str.find_last_not_of(" \t\n\r");
   return (start == string::npos || end == string::npos) ? "" : str.substr(start, end - start + 1);
 }
-
-// Structure to represent an XML node
-struct XmlNode
-{
-  string name;                    // Tag name
-  map<string, string> attributes; // Tag attributes
-  string text;                    // Inner text
-  vector<XmlNode> children;       // Child nodes
-};
 
 // Function to parse an XML input stream into an XmlNode tree
 XmlNode parseXml(istream &input)
@@ -178,12 +161,14 @@ void convertXmlToJson(const string &inputFile, const string &outputFile)
   cout << "Conversion completed successfully! \nFile saved to " << (string)outputFile << endl;
 }
 
-int main()
-{
-  const string inputXmlFile = "sample.xml";
-  const string outputJsonFile = "output.json";
+// int main()
+// {
+//   string inputXmlFile ;
+//   string outputJsonFile ;
+  
+//   cin >> inputXmlFile >> outputJsonFile;
+  
+//   convertXmlToJson(inputXmlFile, outputJsonFile);
 
-  convertXmlToJson(inputXmlFile, outputJsonFile);
-
-  return 0;
-}
+//   return 0;
+// }
