@@ -1,4 +1,15 @@
-#include <Parse_XML.h>
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <string>
+#include <cctype>
+#include <string>
+#include <stack>
+#include <unordered_map>
+#include <algorithm>
+#include "../headers/Parse_XML.h"
+
+using namespace std;
 
 // Helper function to erase spaces from a string (assuming it's defined elsewhere)
 string Erase_Spaces(const string &str)
@@ -244,25 +255,3 @@ void Write_XML_File(const string &file_path, const vector<string> &tokenized_dat
   file.close();
   cout << "File written successfully to: " << file_path << endl;
 }
-
- // Example usage
-// int main()
-// {
-//   string file_path = "test.xml"; // Path to your XML file
-//   string output_file = "output.xml";
-//   vector<string> parsed_data = Parse_XML_File(file_path);
-
-//     vector<string> correctedTags;
-//     vector<int> errorIndices;
-
-//     // Validate and correct the tags
-//     int errorCount = checking_errors(parsed_data, correctedTags, errorIndices);
-
-//     Write_XML_File(output_file , correctedTags);
-//         // for (const string &element : correctedTags)
-//         // {
-//         //   cout << element << endl;
-//         // }
-
-//         return 0;
-// }
