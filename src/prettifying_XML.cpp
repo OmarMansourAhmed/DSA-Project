@@ -29,7 +29,7 @@ void prettifyXML(const string &inputFile, const string &outputFile)
     stack<string> tagStack;
     string currentContent;
     string formatted_XML;
-    
+
     // Read entire file into a string
     stringstream buffer;
     buffer << input.rdbuf();
@@ -53,7 +53,7 @@ void prettifyXML(const string &inputFile, const string &outputFile)
         {
             currentContent += c;
             string tagContent = trimWhitespace(currentContent);
-            
+
             if (tagContent[1] == '/') // Closing tag
             {
                 if (!tagStack.empty())
