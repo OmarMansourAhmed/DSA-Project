@@ -5,25 +5,16 @@
 #include <vector>
 #include <sstream>
 #include <cctype>
+#include "../headers/ConvertToJSON.h"
 
 using namespace std;
 
 // Helper function to trim whitespace from a string
-string trim(const string &str)
-{
-  int start = str.find_first_not_of(" \t\n\r");
-  int end = str.find_last_not_of(" \t\n\r");
-  return (start == string::npos || end == string::npos) ? "" : str.substr(start, end - start + 1);
+string trim(const string &str) {
+    int start = str.find_first_not_of(" \t\n\r");
+    int end = str.find_last_not_of(" \t\n\r");
+    return (start == string::npos || end == string::npos) ? "" : str.substr(start, end - start + 1);
 }
-
-// Structure to represent an XML node
-struct XmlNode
-{
-  string name;                    // Tag name
-  map<string, string> attributes; // Tag attributes
-  string text;                    // Inner text
-  vector<XmlNode> children;       // Child nodes
-};
 
 // Function to parse an XML input stream into an XmlNode tree
 XmlNode parseXml(istream &input)
@@ -97,7 +88,7 @@ XmlNode parseXml(istream &input)
 }
 
 // Function to convert an XmlNode tree into JSON format
-string xmlToJson(const XmlNode &node, int indent = 0)
+string xmlToJson(const XmlNode &node, int indent)
 {
   ostringstream oss;
   string indentation(indent, ' ');
@@ -109,13 +100,14 @@ string xmlToJson(const XmlNode &node, int indent = 0)
   if (!node.attributes.empty())
   {
     oss << indentation << "  \"attributes\": {\n";
-    for (const auto &[key, value] : node.attributes)
+    bool firstAttr = true;
+    for (const auto &attr : node.attributes)
     {
-      oss << indentation << "    \"" << key << "\": \"" << value << "\",\n";
+      if (!firstAttr) oss << ",\n";
+      oss << indentation << "  \"@" << attr.first << "\": \"" << attr.second << "\"";
+      firstAttr = false;
     }
-    oss.seekp(-2, ios_base::end); // Remove trailing comma
-    oss << "\n"
-        << indentation << "  },\n";
+    oss << "\n" << indentation << "  },\n";
   }
 
   // Add text if present
@@ -162,7 +154,7 @@ void convertXmlToJson(const string &inputFile, const string &outputFile)
   xmlFile.close();
 
   // Convert the XML tree into JSON format
-  string json = xmlToJson(root);
+  string json = xmlToJson(root, 0);
 
   // Write the JSON to the output file
   ofstream jsonFile(outputFile);
@@ -176,14 +168,4 @@ void convertXmlToJson(const string &inputFile, const string &outputFile)
   jsonFile.close();
 
   cout << "Conversion completed successfully! \nFile saved to " << (string)outputFile << endl;
-}
-
-int main()
-{
-  const string inputXmlFile = "sample.xml";
-  const string outputJsonFile = "output.json";
-
-  convertXmlToJson(inputXmlFile, outputJsonFile);
-
-  return 0;
 }

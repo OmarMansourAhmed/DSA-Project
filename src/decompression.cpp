@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "decompression.h"
+#include "../headers/decompression.h"
 #include <map>
 
 using namespace std;

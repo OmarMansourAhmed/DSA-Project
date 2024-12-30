@@ -1,18 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include "../headers/minifying.h"
 
 using namespace std;
-
-void minifying(string const &input_file, string const &output_file);
-
-int main()
-{
-    string s = "./sample.xml";
-    string o = "./sample_output.xml";
-
-    minifying(s, o);
-}
 
 void minifying(string const &input_file, string const &output_file)
 {

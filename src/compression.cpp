@@ -1,4 +1,4 @@
-#include "compression.h"
+#include "../headers/compression.h"
 #include <algorithm>
 
 using namespace std;
@@ -44,10 +44,10 @@ string compress(const string &input, int iterations, unordered_map<string, char>
             break;
 
         auto maxPair = max_element(pairCounts.begin(), pairCounts.end(),
-                                        [](const auto &a, const auto &b)
-                                        {
-                                            return a.second < b.second;
-                                        });
+                                   [](const auto &a, const auto &b)
+                                   {
+                                       return a.second < b.second;
+                                   });
 
         string mostFrequentPair = maxPair->first;
         if (mapping.find(mostFrequentPair) != mapping.end())
