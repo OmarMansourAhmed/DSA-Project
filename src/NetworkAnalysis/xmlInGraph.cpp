@@ -1,5 +1,5 @@
 #include "../../headers/Parse_XML.h"
-#include "../../headers/NetworkAnalysis.h"
+#include "../../headers/xmlInGraph.h"
 
 vector<User> parseUsersFromXML(const string &file_path)
 {
