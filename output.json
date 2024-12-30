@@ -1,0 +1,188 @@
+{
+  "name": "users",
+  "children": [
+{
+      "name": "user",
+      "children": [
+{
+          "name": "id",
+          "children": [
+{
+              "name": "name",
+              "children": [
+{
+                  "name": "posts",
+                  "children": [
+{
+                      "name": "post",
+                      "children": [
+{
+                          "name": "body",
+                          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                        },
+{
+                          "name": "topics",
+                          "children": [
+{
+                              "name": "topic",
+                              "text": "economy"
+                            },
+{
+                              "name": "topic",
+                              "text": "finance"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+{
+                      "name": "post",
+                      "children": [
+{
+                          "name": "body",
+                          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                        },
+{
+                          "name": "topics",
+                          "children": [
+{
+                              "name": "topic",
+                              "text": "solar_energy"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+{
+                  "name": "followers",
+                  "children": [
+{
+                      "name": "follower",
+                      "children": [
+{
+                          "name": "id"
+                        },
+{
+                          "name": "follower",
+                          "children": [
+{
+                              "name": "id"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+{
+                      "name": "user",
+                      "children": [
+{
+                          "name": "id",
+                          "children": [
+{
+                              "name": "name",
+                              "children": [
+{
+                                  "name": "posts",
+                                  "children": [
+{
+                                      "name": "post",
+                                      "children": [
+{
+                                          "name": "body",
+                                          "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                                        },
+{
+                                          "name": "topics",
+                                          "children": [
+{
+                                              "name": "topic",
+                                              "text": "education"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+{
+                                  "name": "followers",
+                                  "children": [
+{
+                                      "name": "follower",
+                                      "children": [
+{
+                                          "name": "id"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+{
+                                  "name": "user",
+                                  "children": [
+{
+                                      "name": "id",
+                                      "children": [
+{
+                                          "name": "name",
+                                          "children": [
+{
+                                              "name": "posts",
+                                              "children": [
+{
+                                                  "name": "post",
+                                                  "children": [
+{
+                                                      "name": "body",
+                                                      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                                                    },
+{
+                                                      "name": "topics",
+                                                      "children": [
+{
+                                                          "name": "topic",
+                                                          "text": "sports"
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+{
+                                              "name": "followers",
+                                              "children": [
+{
+                                                  "name": "follower",
+                                                  "children": [
+{
+                                                      "name": "id"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

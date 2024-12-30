@@ -9,8 +9,11 @@
 #include "headers/compression.h"
 #include "headers/decompression.h"
 #include "headers/prettifying_XML.h"
+#include "headers/NetworkAnalysis.h"
 
 using namespace std;
+
+
 
 void printUsage()
 {
