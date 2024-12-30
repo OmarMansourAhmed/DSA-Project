@@ -13,28 +13,35 @@ void minifying(string const &input_file, string const &output_file)
     string temp2 = "";
     bool flag = false;
     // check if the file is opened successfully
-    if (!input_var.is_open()){
+    if (!input_var.is_open())
+    {
         cout << "Can not open the file please, Try again!";
         return;
     }
-    char previous ;
-    while (getline(input_var, temp1)){
-        for(char c : temp1){
-            if(c == '>') {
-                flag = true ;
-                temp2 = temp2 + c ;
+    char previous;
+    while (getline(input_var, temp1))
+    {
+        for (char c : temp1)
+        {
+            if (c == '>')
+            {
+                flag = true;
+                temp2 = temp2 + c;
                 continue;
             }
-            if(c == ' ' && flag)
+            if (c == ' ' && flag)
                 continue;
             else
-                flag = false ;
+                flag = false;
 
-            temp2 = temp2+c;
-            if(c == '/') {
-                for (int i = temp2.length() - 3; i >= 0; i--) {
-                    if(temp2[i]==' '){
-                        temp2.erase(i,1);
+            temp2 = temp2 + c;
+            if (c == '/')
+            {
+                for (int i = temp2.length() - 3; i >= 0; i--)
+                {
+                    if (temp2[i] == ' ')
+                    {
+                        temp2.erase(i, 1);
                     }
                     else
                         break;
@@ -42,7 +49,7 @@ void minifying(string const &input_file, string const &output_file)
             }
         }
     }
-    output_var << temp2 ;
+    output_var << temp2;
     input_var.close();
     output_var.close();
 }

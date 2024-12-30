@@ -10,10 +10,11 @@
 using namespace std;
 
 // Helper function to trim whitespace from a string
-string trim(const string &str) {
-    int start = str.find_first_not_of(" \t\n\r");
-    int end = str.find_last_not_of(" \t\n\r");
-    return (start == string::npos || end == string::npos) ? "" : str.substr(start, end - start + 1);
+string trim(const string &str)
+{
+  int start = str.find_first_not_of(" \t\n\r");
+  int end = str.find_last_not_of(" \t\n\r");
+  return (start == string::npos || end == string::npos) ? "" : str.substr(start, end - start + 1);
 }
 
 // Function to parse an XML input stream into an XmlNode tree
@@ -103,11 +104,13 @@ string xmlToJson(const XmlNode &node, int indent)
     bool firstAttr = true;
     for (const auto &attr : node.attributes)
     {
-      if (!firstAttr) oss << ",\n";
+      if (!firstAttr)
+        oss << ",\n";
       oss << indentation << "  \"@" << attr.first << "\": \"" << attr.second << "\"";
       firstAttr = false;
     }
-    oss << "\n" << indentation << "  },\n";
+    oss << "\n"
+        << indentation << "  },\n";
   }
 
   // Add text if present
