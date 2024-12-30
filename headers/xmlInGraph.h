@@ -1,5 +1,5 @@
-#ifndef NETWORKANALYSIS_H
-#define NETWORKANALYSIS_H
+#ifndef XMLINGRAPH_H  // if not defined
+#define XMLINGRAPH_H  // if not defined
 
 #include <string>
 #include <vector>
@@ -29,4 +29,4 @@ vector<User> parseUsersFromXML(const string &file_path);
 
     void generateGraph(const vector<User> &users, const string &outputFile);
 
-#endif // NETWORKANALYSIS_H
+#endif // XMLINGRAPH_H  // if not defined
