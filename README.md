@@ -9,10 +9,12 @@ A comprehensive C++ tool for XML file processing, including parsing, validation,
 - XML Minification
 - File Compression
 - File Decompression
+- Network Analysis and Visualization
 
 ## Prerequisites
 
 - C++ Compiler (clang++ recommended)
+- Graphviz (required for graph visualization)
 - Make sure you have read/write permissions in the project directory
 
 ## Project Structure
@@ -26,6 +28,11 @@ DSA-Project/
 │   ├── minifying.cpp     # XML minification implementation
 │   ├── compression.cpp   # Compression implementation
 │   ├── decompression.cpp # Decompression implementation
+│   ├── NetworkAnalysis/  # Network analysis implementations
+│   │   ├── most_interactive.cpp
+│   │   ├── mutualNetwork.cpp
+│   │   ├── networkSearching.cpp
+│   │   └── xmlInGraph.cpp
 │   └── prettifying_XML.cpp # XML prettifying implementation
 ├── headers/              # Header files directory
 │   ├── Parse_XML.h      # XML parsing declarations
@@ -33,6 +40,9 @@ DSA-Project/
 │   ├── minifying.h      # XML minification declarations
 │   ├── compression.h    # Compression declarations
 │   ├── decompression.h  # Decompression declarations
+│   ├── NetworkAnalysis.h # Network analysis declarations
+│   ├── mutualNetwork.h   # Mutual network declarations
+│   ├── xmlInGraph.h      # Graph visualization declarations
 │   └── prettifying_XML.h # XML prettifying declarations
 └── README.md            # This file
 ```
@@ -42,7 +52,7 @@ DSA-Project/
 1. Open terminal in the project directory
 2. Compile the project using clang++:
    ```bash
-   clang++ -std=c++17 -I. main.cpp src/Parse_XML.cpp src/ConvertToJSON.cpp src/minifying.cpp src/compression.cpp src/decompression.cpp src/prettifying_XML.cpp -o xml_editor
+   clang++ -std=c++17 -I. main.cpp src/Parse_XML.cpp src/ConvertToJSON.cpp src/minifying.cpp src/compression.cpp src/decompression.cpp src/prettifying_XML.cpp src/NetworkAnalysis/most_interactive.cpp src/NetworkAnalysis/mutualNetwork.cpp src/NetworkAnalysis/networkSearching.cpp src/NetworkAnalysis/xmlInGraph.cpp -o xml_editor
    ```
 
 ## Running the Program
@@ -50,7 +60,7 @@ DSA-Project/
 The XML editor can be used through command line with the following syntax:
 
 ```bash
-./xml_editor <action> -i <input_file> [-o <output_file>]
+./xml_editor <action> -i <input_file> [-o <output_file>] [-ids id1,id2,id3] [-id user_id] [-w word] [-t topic]
 ```
 
 Available actions:
@@ -71,7 +81,7 @@ Available actions:
   ./xml_editor prettify -i input.xml -o output.xml
   ```
 
-- `minify`: Remove unnecessary whitespace
+- `minify`: Remove unnecessary whitespace from XML
 
   ```bash
   ./xml_editor minify -i input.xml -o output.xml
@@ -90,29 +100,55 @@ Available actions:
   ```
 
 - `to-json`: Convert XML to JSON format
+
   ```bash
   ./xml_editor to-json -i input.xml -o output.json
   ```
 
+- `most_active`: Find most active user in the network
+
+  ```bash
+  ./xml_editor most_active -i input.xml
+  ```
+
+- `most_influencer`: Find most influential user in the network
+
+  ```bash
+  ./xml_editor most_influencer -i input.xml
+  ```
+
+- `mutual`: Find mutual followers between users
+
+  ```bash
+  ./xml_editor mutual -i input.xml -ids "id1,id2,id3"
+  ```
+
+- `suggest`: Get user suggestions based on network
+
+  ```bash
+  ./xml_editor suggest -i input.xml -id user_id
+  ```
+
+- `search`: Search posts by word or topic
+
+  ```bash
+  ./xml_editor search -i input.xml -w word    # Search by word
+  ./xml_editor search -i input.xml -t topic   # Search by topic
+  ```
+
+- `draw`: Generate network graph visualization
+
+  ```bash
+  ./xml_editor draw -i input.xml -o graph.jpg
+  ```
+
 Note: All actions except `verify` require both input (-i) and output (-o) file parameters.
 
-1. After compilation, run the program:
+## After compilation, run the program to print usage instructions:
 
-   ```bash
-   ./xml_processor
-   ```
-
-2. You'll see a menu with the following options:
-
-   - 1: XML Parsing and Validation
-   - 2: XML to JSON Conversion
-   - 3: XML Minification
-   - 4: Compression
-   - 5: Decompression
-   - 6: Run All Tests
-   - 0: Exit
-
-3. Select an option by entering the corresponding number
+```bash
+./xml_processor
+```
 
 ## Input/Output Files
 
@@ -123,6 +159,7 @@ Note: All actions except `verify` require both input (-i) and output (-o) file p
   - Minified XML: `minified_output.xml`
   - Compressed file: `compressed_output.bin`
   - Decompressed file: `decompressed_output.xml`
+  - Network graph: `graph.jpg`
 
 ## Compression and Decompression
 
@@ -144,21 +181,3 @@ For example:
 ./xml_editor decompress -i compressed.xml -o decompressed.xml
 # This will automatically look for compressed.xml.map
 ```
-
-## Sample Usage
-
-1. Place your XML file as `sample.xml` in the project directory
-2. Run the program and choose option 6 to test all features
-3. Check the output files in the project directory
-
-## Error Handling
-
-- The program includes error checking for:
-  - Invalid XML syntax
-  - File read/write operations
-  - Memory allocation
-  - Invalid user input
-
-## Contributing
-
-Feel free to submit issues and enhancement requests!

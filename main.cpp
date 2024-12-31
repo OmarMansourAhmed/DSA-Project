@@ -9,26 +9,37 @@
 #include "headers/compression.h"
 #include "headers/decompression.h"
 #include "headers/prettifying_XML.h"
-#include "headers/NetworkAnalysis.h"
+#include "headers/most_interactive.h"
+#include "headers/mutualNetwork.h"
+#include "headers/networkSearching.h"
+#include "headers/xmlInGraph.h"
 
 using namespace std;
 
-
-
 void printUsage()
 {
-    cout << "Usage: xml_editor <action> -i <input_file> [-f] [-o <output_file>] \n\n"
+    cout << "Usage: xml_editor <action> -i <input_file> [-o <output_file>] [-ids id1,id2,id3] [-id user_id] [-w word] [-t topic]\n\n"
          << "Actions:\n"
-         << "  verify        - Check XML file for errors\n"
-         << "  prettify      - Format XML file with proper indentation\n"
-         << "  minify        - Remove unnecessary whitespace\n"
-         << "  compress      - Compress XML file\n"
-         << "  decompress    - Decompress XML file\n"
-         << "  to-json       - Convert XML to JSON format\n\n"
+         << "  verify          - Check XML file for errors\n"
+         << "  prettify        - Format XML file with proper indentation\n"
+         << "  minify          - Remove unnecessary whitespace\n"
+         << "  compress        - Compress XML file\n"
+         << "  decompress      - Decompress XML file\n"
+         << "  to-json         - Convert XML to JSON format\n"
+         << "  most_active     - Find most active user in the network\n"
+         << "  most_influencer - Find most influential user in the network\n"
+         << "  mutual          - Find mutual followers between users\n"
+         << "  suggest         - Get user suggestions based on network\n"
+         << "  search          - Search posts by word or topic\n"
+         << "  draw            - Generate network graph visualization\n\n"
          << "Options:\n"
-         << "  -i <file>     - Input file (required)\n"
-         << "  -o <file>     - Output file (required for all actions except verify)\n"
-         << "  -f            - Fix errors (only for verify action)\n";
+         << "  -i <file>       - Input file (required)\n"
+         << "  -o <file>       - Output file (required for some actions)\n"
+         << "  -f              - Fix errors (only for verify action)\n"
+         << "  -ids id1,id2,id3- Three user IDs for mutual followers (required for mutual action)\n"
+         << "  -id user_id     - User ID for suggestions (required for suggest action)\n"
+         << "  -w word         - Word to search in posts\n"
+         << "  -t topic        - Topic to search in posts\n";
 }
 
 string getOptionValue(int argc, char *argv[], const string &option)
@@ -66,6 +77,11 @@ int main(int argc, char *argv[])
     string action = argv[1];
     string inputFile = getOptionValue(argc, argv, "-i");
     string outputFile = getOptionValue(argc, argv, "-o");
+    string idsString = getOptionValue(argc, argv, "-ids");
+    string userId = getOptionValue(argc, argv, "-id");
+    string wordInput = getOptionValue(argc, argv, "-w");
+    string topicInput = getOptionValue(argc, argv, "-t");
+
     bool fixErrors = hasFlag(argc, argv, "-f");
 
     if (inputFile.empty())
@@ -75,9 +91,33 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    if (action != "verify" && outputFile.empty())
+    // List of actions that don't require output file
+    const vector<string> noOutputRequired = {"verify", "most_active", "most_influencer", "mutual", "suggest", "search"};
+
+    // Check if action requires output file
+    if (std::find(noOutputRequired.begin(), noOutputRequired.end(), action) == noOutputRequired.end() && outputFile.empty())
     {
         cout << "Error: Output file is required for action '" << action << "'\n";
+        printUsage();
+        return 1;
+    }
+
+    if (action == "mutual" && idsString.empty())
+    {
+        cout << "Error: Specifying users ids is required for action '" << action << "'\n";
+        printUsage();
+        return 1;
+    }
+
+    if (action == "suggest" && userId.empty())
+    {
+        cout << "Error: Specifying user id is required for action '" << action << "'\n";
+        printUsage();
+        return 1;
+    }
+    if (action == "search" && wordInput.empty() && topicInput.empty())
+    {
+        cout << "Error: enter the word with flag '-w word' or topic with flag '-t topic' to search\n";
         printUsage();
         return 1;
     }
@@ -237,6 +277,61 @@ int main(int argc, char *argv[])
         else if (action == "to-json")
         {
             convertXmlToJson(inputFile, outputFile);
+        }
+        else if (action == "most_active")
+        {
+            mostActiveUserCaller(inputFile);
+        }
+        else if (action == "most_influencer")
+        {
+            mostInfluencerCaller(inputFile);
+        }
+        else if (action == "most_influencer")
+        {
+            mostInfluencerCaller(inputFile);
+        }
+        else if (action == "suggest")
+        {
+            printSuggestedUsersCaller(inputFile, userId);
+        }
+        else if (action == "mutual")
+        {
+            // Extract IDs from the comma-separated string
+            vector<string> ids;
+            stringstream ss(idsString);
+            string id;
+
+            // Split by comma
+            while (getline(ss, id, ','))
+            {
+                // Remove any whitespace
+                id.erase(remove_if(id.begin(), id.end(), ::isspace), id.end());
+                if (!id.empty())
+                {
+                    ids.push_back(id);
+                }
+            }
+
+            // Check if we have exactly 3 IDs
+            if (ids.size() != 3)
+            {
+                cout << "Error: Exactly 3 comma-separated IDs are required for mutual followers (e.g., -ids \"id1,id2,id3\")\n";
+                return 1;
+            }
+
+            printMutualFollowersCaller(inputFile, ids[0], ids[1], ids[2]);
+        }
+        else if (action == "search")
+        {
+            if (!wordInput.empty())
+                searchWordCaller(inputFile, wordInput);
+            if (!topicInput.empty())
+                searchTopicCaller(inputFile, topicInput);
+        }
+        else if (action == "draw")
+        {
+            vector<User> Users = parseUsersFromXML(inputFile);
+            generateGraph(Users, outputFile);
         }
         else
         {
