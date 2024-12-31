@@ -8,6 +8,8 @@
 #include <unordered_map>
 #include <algorithm>
 #include <unordered_set>
+#include "Parse_XML.h"
+
 using namespace std;
 
 struct Posts
