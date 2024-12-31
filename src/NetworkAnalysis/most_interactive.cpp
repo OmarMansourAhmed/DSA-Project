@@ -1,6 +1,11 @@
 #include "../../headers/Parse_XML.h"
 #include "../../headers/xmlInGraph.h"
 
+void mostInfluencerCaller(const string &file_path){
+    vector<User> users ;
+    users = parseUsersFromXML(file_path) ;
+    mostInfluencer(users) ;
+}
 
 void mostInfluencer(const vector<User> &users)
 {
@@ -18,6 +23,12 @@ void mostInfluencer(const vector<User> &users)
     }
     cout << "Name: " << mostInfluencerUser.name << endl;
     cout << "id: " << mostInfluencerUser.id << endl;
+}
+
+void mostActiveUserCaller(const string &file_path){
+    vector<User> users ;
+    users = parseUsersFromXML(file_path) ;
+    mostActiveUser(users) ;
 }
 
 void mostActiveUser(const vector<User> &users)
